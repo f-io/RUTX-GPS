@@ -14,7 +14,7 @@
 
  Make the script executeable<br>
  ```
- chmod a+x /root/rutx_gps_nextcloud.sh
+ chmod a+x /root/gps_nextcloud.sh
  ```
 
  Add this line (vi) at the end of your /etc/rc.local<br>
