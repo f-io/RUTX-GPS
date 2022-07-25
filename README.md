@@ -4,7 +4,7 @@
  ## Installation
  Login via ssh<br>
  ```
- curl https://github.com//f-io/rutx_gps_nextcloud/raw/main/gps_nextcloud.sh --output /root/gps_nextcloud.sh
+ curl https://github.com/f-io/rutx_gps_nextcloud/raw/main/gps_nextcloud.sh --output /root/gps_nextcloud.sh
  ```
 
  Change (vi) these parameters to your needs<br>
