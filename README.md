@@ -34,6 +34,7 @@
  | Device | Firmware |
  |-|-|
  |RUTX11|RUTX_R_00.07.02.2|
+ |RUTX11|RUTX_R_00.07.03.1|
 
  ###
  Based on https://github.com/G4Cab/TeltonikaNMEAlogger
