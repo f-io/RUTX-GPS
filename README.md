@@ -1,5 +1,6 @@
  # GPS logging using Teltonika devices
  Scrip to track your Teltonika device within your private nextcloud (phonetrack app)<br>
+ This integration survives firmware updates.<br>
 
 ## Installation
 
@@ -12,6 +13,6 @@ You can simply put this script into "Custom Scripts" within the GUI or directly 
 |RUTX11|RUTX_R_00.07.02.2|
 |RUTX11|RUTX_R_00.07.03.1|
 |RUTX11|RUTX_R_00.07.04.2|
-
+|RUTX11|RUTX_R_00.07.04.4|
 ###
 Based on https://github.com/G4Cab/TeltonikaNMEAlogger
