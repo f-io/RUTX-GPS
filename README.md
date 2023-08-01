@@ -1,19 +1,16 @@
- # GPS logging using Teltonika devices
- Scrip to track your Teltonika device within your private nextcloud (phonetrack app)<br>
+ # Teltonika GPS/NEMA logging
+ Scrip to track your Teltonika device (NMEA) within your private nextcloud (phonetrack app)<br>
  This script survives FW updates and no terminal interaction is required.<br>
 
 ## Installation
 
-You can simply put this script into "Custom Scripts" within the GUI or directly add (vi) the code to /etc/rc.local<br>
+Put this script into "Custom Scripts" within the GUI (/etc/rc.local)<br>
 
 ## Tested devices
 
 | Device | Firmware |
 |-|-|
-|RUTX11|RUTX_R_00.07.02.2|
-|RUTX11|RUTX_R_00.07.03.1|
-|RUTX11|RUTX_R_00.07.04.2|
-|RUTX11|RUTX_R_00.07.04.3|
-|RUTX11|RUTX_R_00.07.04.4|
+|RUTX50|RUTX_R_00.07.06.3|
+
 ###
 Based on https://github.com/G4Cab/TeltonikaNMEAlogger
