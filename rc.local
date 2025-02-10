@@ -31,30 +31,42 @@ do
       LATOLD=\$LAT # set old latitude to new one
       SPD=\$(/usr/sbin/gpsctl -v) # get ground speed
       LON=\$(/usr/sbin/gpsctl -x) # get longitude
-      SAT=\$(/usr/sbin/gpsctl -p) # get connected sattelites
+      SAT=\$(/usr/sbin/gpsctl -p) # get connected satellites
       ALT=\$(/usr/sbin/gpsctl -a) # get altitude
       ACC=\$(/usr/sbin/gpsctl -u) # get accuracy
       TIMESTAMP=\$(/usr/sbin/gpsctl -t) # get gps timestamp
       GPSResults="\$URL/apps/phonetrack/log/gpslogger/\$SESSION/\$NAME?lat=\$LAT&lon=\$LON&sat=\$SAT&alt=\$ALT&acc=\$ACC&speed=\$SPD&timestamp=\$TIMESTAMP"
-      DataCheck=\$(ip addr show qmimux0 | grep "inet\b" | awk '{print \$2}' | cut -d/ -f1)
-      ip_full=\$(echo \$DataCheck | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])') # validate IP
-      if [ \$ip_full != "" ] #If Valid IP
-      then
+
+      # List of network interfaces to check
+      INTERFACES="wwan0 eth0 wlan0-2"
+      ip_full=""
+
+      # Iterate through the interfaces until a valid IP is found
+      for iface in \$INTERFACES; do
+          DataCheck=\$(ip addr show "\$iface" | grep "inet\b" | awk '{print \$2}' | cut -d/ -f1)
+          ip_full=\$(echo "\$DataCheck" | grep -oE '((1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])\.){3}(1?[0-9][0-9]?|2[0-4][0-9]|25[0-5])')
+
+          if [ -n "\$ip_full" ]; then
+              echo "Valid IP found: \$iface: \$ip_full"
+              break
+          fi
+      done
+
+      if [ -n "\$ip_full" ]; then # If Valid IP
         curl --insecure \${GPSResults// /} # send data to nextcloud
-        if [ -f \$OFFLINELOGFILE ] # if file exists
-        then
+        if [ -f "\$OFFLINELOGFILE" ]; then # if file exists
           while IFS= read -r line
           do
-            curl -k \$line
+            curl -k "\$line"
           done <"\$OFFLINELOGFILE"
-          rm \$OFFLINELOGFILE # remove file
-          fi
-        else
-          echo \${GPSResults// /} >> \$OFFLINELOGFILE # log GPS data in file
+          rm "\$OFFLINELOGFILE" # remove file
+        fi
+      else
+        echo \${GPSResults// /} >> "\$OFFLINELOGFILE" # log GPS data in file
       fi
     fi
   fi
-  sleep \$DELAY
+  sleep "\$DELAY"
 done
 EOF
 chmod +x /root/gps_nextcloud.sh
